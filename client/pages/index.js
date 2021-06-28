@@ -7,6 +7,8 @@ const Page = () => (
     Welcome, <Name />
     <br/><br/>
     <Link href="/about"><a>About</a></Link>
+    <Link href="/UserList"><a>userList</a></Link>
+
 
   </div>
 )
