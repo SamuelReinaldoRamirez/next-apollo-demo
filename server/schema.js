@@ -9,7 +9,7 @@ const casual = require('casual')
 casual.define('user', function() {
   return {
       email: casual.email,
-      name: casual.name,
+      name: casual.full_name,
       address: casual.address,
       phone: casual.phone
   };
@@ -41,7 +41,7 @@ module.exports = new GraphQLSchema({
       dummyUserList:{
         type: GraphQLString,
         resolve() {
-          return JSON.stringify(arrayOfUsers(2000, generateUser))
+          return JSON.stringify(arrayOfUsers(6, generateUser))
         }
       },
       dummyUser:{
