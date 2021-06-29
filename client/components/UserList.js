@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
+import TextField from "@material-ui/core/TextField"
 
 
 
@@ -59,20 +61,31 @@ const Component = () => {
     dummyUserList
   }
 `
+
+const [searchText, setSearchText] = useState("");
+
   const { loading, error, data} = useQuery(query);
   if (loading) return (<span>loading...</span>)
   if(error) return (<span>error</span>)
   const dummyList = JSON.parse(data.dummyUserList);
   return(
-    console.log(data.dummyUserList),
     <div>
       <Button className={classes.button} variant="contained">
         Hello World!
       </Button>
+      <TextField
+        id="outlined-basic"
+        label="search name"
+        variant="outlined"
+        value={searchText}
+        style={{width: 300, marginLeft: "10px" }}
+        onChange={(event) => {setSearchText(event.target.value)}}
+      />
       <Grid style={{ marginTop: "20px" }} className={classes.gridContainer} container spacing={4} justify="center">    
-          {dummyList.map((user) => (
-            <Grid item xs={12} sm={6} md={4} xl={3}>
-              <Card className={classes.button} variant="contained">
+        {dummyList.filter(user => (
+        user.name.startsWith({searchText}.searchText))).map(user => (
+            <Grid item xs={12} sm={6} md={4} xl={3} key={user.name}>
+              <Card className={classes.button} variant="outlined" >
                 <CardContent>
                   <Typography
                     className={classes.title}
