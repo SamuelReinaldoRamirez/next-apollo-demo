@@ -34,7 +34,7 @@ function Component() {
         overflowY: "scroll",
         maxHeight: "400px",
       },
-      button: {
+      card: {
         color: "white",
         [theme.breakpoints.down("xs")]: {
           '&:hover': {
@@ -53,6 +53,27 @@ function Component() {
             background: "white",
           },
           backgroundColor: "purple"
+        }
+      },
+      button: {
+        color: "black",
+        [theme.breakpoints.down("xs")]: {
+          '&:hover': {
+            background: "red",
+          },
+          backgroundColor: "blue"
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+          '&:hover': {
+            background: "pink",
+          },
+          backgroundColor: "green"
+        },
+        "@media (min-width: 1280px)": {
+          '&:hover': {
+            background: "red",
+          },
+          backgroundColor: "blue"
         }
       }
   }));
@@ -73,6 +94,7 @@ function Component() {
   const { loading, error, data} = useQuery(query);
   if (loading) return (<span>loading...</span>)
   if(error) return (<span>error</span>)
+
     function handleFetch() {   
       console.log("handlefetch") 
       fetch('http://localhost:5000/graphql', {
@@ -94,9 +116,6 @@ function Component() {
   return(
     <div>
       <div className={classes.pane}>
-        <Button className={classes.button} variant="contained">
-          Hello World!
-        </Button>
         <TextField
           id="outlined-basic"
           label="search name"
@@ -120,7 +139,7 @@ function Component() {
             {infiniteScrollLst.filter(user => (
             user.name.startsWith({searchText}.searchText))).map(user => (
                 <Grid item xs={12} sm={6} md={4} xl={3} key={user.name}>
-                  <Card className={classes.button} variant="outlined" >
+                  <Card className={classes.card} variant="outlined" >
                     <CardContent>
                       <Typography
                         className={classes.title}
@@ -145,6 +164,9 @@ function Component() {
       </InfiniteScroll>
       </div>
       <div>number of elements : {infiniteScrollLst.length}</div>
+      <Button onClick={handleFetch} className={classes.button} variant="contained">
+          Scroll down or click me!
+        </Button>
     </div>
   )}
 
