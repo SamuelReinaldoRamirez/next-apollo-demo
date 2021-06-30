@@ -41,7 +41,7 @@ module.exports = new GraphQLSchema({
       dummyUserList:{
         type: GraphQLString,
         resolve() {
-          return JSON.stringify(arrayOfUsers(6, generateUser))
+          return JSON.stringify(arrayOfUsers(20, generateUser))
         }
       },
       dummyUser:{
